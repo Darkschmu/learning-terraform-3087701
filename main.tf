@@ -35,7 +35,8 @@ module "blog_vpc" {
 
 module "blog_autoscaling" {
   source  = "terraform-aws-modules/autoscaling/aws"
-  version = "6.5.2"
+  version = "=> 7"
+#  version = "6.5.2"
 
   name = "blog"
 
@@ -50,7 +51,7 @@ module "blog_autoscaling" {
 
 module "blog_alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 6.0"
+  #version = "~> 6.0"
 
   name = "blog-alb"
 
@@ -63,8 +64,10 @@ module "blog_alb" {
   target_groups = [
     {
       name_prefix      = "blog-"
-      backend_protocol = "HTTP"
-      backend_port     = 80
+      protocol = "HTTP"
+      port     = 80
+      #backend_protocol = "HTTP"
+      #backend_port     = 80
       target_type      = "instance"
     }
   ]
